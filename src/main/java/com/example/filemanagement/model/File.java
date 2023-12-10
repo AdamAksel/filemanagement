@@ -9,6 +9,7 @@ public class File {
     private String id;
     private String name;
     private String folderId;
+    private String path;
     private long size;
 
     public File() {}
@@ -18,7 +19,12 @@ public class File {
         this.folderId = folderId;
         this.size = size;
     }
-
+    public String getPath() {
+        return path;
+    }
+    public void setPath(String path) {
+        this.path = path;
+    }
     public String getId() {
         return id;
     }
