@@ -24,10 +24,15 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public boolean authenticateUser(String username, String password) {
+    public User authenticateUser(String username, String password) {
         Optional<User> foundUser = userRepository.findByUsername(username);
-        return foundUser.isPresent() && foundUser.get().getPassword().equals(password);
+        if (foundUser.isPresent() && foundUser.get().getPassword().equals(password)) {
+            return foundUser.get();
+        } else {
+            return null;
+        }
     }
+
 
 }
 
