@@ -29,15 +29,15 @@ public class FileService {
 
     public File uploadFile(MultipartFile multipartFile, String folderId) throws IOException {
         String fileName = multipartFile.getOriginalFilename();
-        String directoryPath = "/pleasework/" + folderId; // Define the directory path
+        String directoryPath = "/pleasework/" + folderId;
         Path directory = Paths.get(directoryPath);
 
         if (!Files.exists(directory)) {
-            Files.createDirectories(directory); // Create directory if it doesn't exist
+            Files.createDirectories(directory);
         }
 
         Path filePath = directory.resolve(fileName);
-        Files.copy(multipartFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING); // Save the file
+        Files.copy(multipartFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         File file = new File();
         file.setName(fileName);
@@ -49,19 +49,15 @@ public class FileService {
     }
 
     public void deleteFile(String fileId) {
-        // Assuming File model has a field 'path' pointing to the file's location
         File file = fileRepository.findById(fileId)
                 .orElseThrow(() -> new RuntimeException("File not found"));
 
-        // Implement logic to delete the file from the storage
-        // Example for a file stored in the filesystem:
         Path path = Paths.get(file.getId());
         java.io.File fileToDelete = path.toFile();
         if (fileToDelete.exists()) {
             fileToDelete.delete();
         }
 
-        // Delete the file metadata from the database
         fileRepository.deleteById(fileId);
     }
 
@@ -69,7 +65,7 @@ public class FileService {
         File file = fileRepository.findById(fileId)
                 .orElseThrow(() -> new RuntimeException("File not found"));
 
-        Path path = Paths.get(file.getPath()); // Use the stored file path
+        Path path = Paths.get(file.getPath());
         Resource resource;
         try {
             resource = new UrlResource(path.toUri());

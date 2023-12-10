@@ -29,29 +29,16 @@ public class File {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getFolderId() {
-        return folderId;
-    }
 
     public void setFolderId(String folderId) {
         this.folderId = folderId;
     }
 
-    public long getSize() {
-        return size;
-    }
 
     public void setSize(long size) {
         this.size = size;
